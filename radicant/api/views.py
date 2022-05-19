@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from rest_framework import viewsets
 
-# Create your views here.
+from .serializers import EtfSerializer
+from .models import Etf
+
+class EtfViewSet(viewsets.ModelViewSet):
+    queryset = Etf.objects.all()
+    serializer_class = EtfSerializer
