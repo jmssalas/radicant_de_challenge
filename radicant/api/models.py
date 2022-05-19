@@ -5,7 +5,7 @@ from django.db import models
 # After the ETFs.csv file was imported to db.sqlite3
 
 class Etf(models.Model):
-    fund_symbol = models.TextField(blank=True, null=True)
+    fund_symbol = models.TextField(blank=True, primary_key=True)
     quote_type = models.TextField(blank=True, null=True)
     region = models.TextField(blank=True, null=True)
     fund_short_name = models.TextField(blank=True, null=True)
@@ -149,4 +149,5 @@ class Etf(models.Model):
     fund_treynor_ratio_10years = models.TextField(blank=True, null=True)
 
     class Meta:
+        managed = False
         db_table = 'etf'
