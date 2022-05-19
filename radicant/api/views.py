@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 
-from .serializers import EtfSerializer
+from .serializers import EtfSerializer, FilterSerializer
 from .models import Etf
 
 class EtfViewSet(viewsets.ModelViewSet):
@@ -8,7 +8,15 @@ class EtfViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         queryset = Etf.objects.all()
-        size_type = self.request.query_params.get('size_type')
+        serializer = FilterSerializer(data=self.request.query_params)
+
+        if serializer.is_valid():
+            size_type = serializer.data['size_type']
+            fund_category = serializer.data['fund_category']
+
         if size_type is not None:
             queryset = queryset.filter(size_type=size_type)
+        if fund_category is not None:
+            queryset = queryset.filter(fund_category=fund_category)
+
         return queryset

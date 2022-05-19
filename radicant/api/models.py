@@ -152,3 +152,7 @@ class Etf(models.Model):
         managed = False
         db_table = 'etf'
         ordering = ['fund_symbol']
+
+class Filter(models.Model):
+    size_type = models.TextField(null=True)
+    fund_category = models.TextField(null=True)
