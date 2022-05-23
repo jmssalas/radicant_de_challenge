@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from .serializers import EtfSerializer, FilterSerializer
 from .models import Etf
 
-class EtfViewSet(viewsets.ModelViewSet):
+class EtfViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = EtfSerializer
 
     def get_queryset(self):
