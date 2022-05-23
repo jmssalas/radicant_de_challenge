@@ -5,6 +5,10 @@ help:
 
 CURDIR=$(shell pwd)
 WORKDIR=/usr/src/myapp
+DOCKER_RUN=docker run -it -v $(CURDIR):$(WORKDIR) -w $(WORKDIR) -p 8000:8000 python bash -c
 
 enter: ## Enter into the docker
-	docker run -it -v $(CURDIR):$(WORKDIR) -w $(WORKDIR) -p 8000:8000 python bash -c "pip install -r requirements.txt; bash"
+	$(DOCKER_RUN) "pip install -r requirements.txt; bash"
+
+run: ## Run Django server into the docker
+	$(DOCKER_RUN) "pip install -r requirements.txt; python radicant/manage.py runserver 0.0.0.0:8000"
