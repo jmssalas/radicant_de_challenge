@@ -9,4 +9,4 @@ class EtfSerializer(serializers.ModelSerializer):
 class FilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Filter
-        fields = '__all__'
+        fields = ['fund_category', 'size_type']
