@@ -1,9 +1,8 @@
-from rest_framework import viewsets, generics
+from rest_framework import generics
 from .serializers import EtfSerializer, FilterSerializer
 from .models import Etf
 
-class EtfViewSet(viewsets.ReadOnlyModelViewSet):
-    serializer_class = EtfSerializer
+class EtfListCreateAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = Etf.objects.all()
@@ -22,5 +21,8 @@ class EtfViewSet(viewsets.ReadOnlyModelViewSet):
 
         return queryset
 
-class FilterCreateApiView(generics.CreateAPIView):
-    serializer_class = FilterSerializer
+    def get_serializer_class(self):
+        if self.request.method == 'GET':
+            return EtfSerializer
+        if self.request.method == 'POST':
+            return FilterSerializer
