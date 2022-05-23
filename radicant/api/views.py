@@ -1,8 +1,11 @@
 from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
 from .serializers import EtfSerializer, FilterSerializer
 from .models import Etf, Filter
 
 class EtfListCreateAPIView(generics.ListCreateAPIView):
+    filter_backends = [DjangoFilterBackend, ]
+    filter_fields = ['size_type', 'fund_category', ]
 
     def get_queryset(self):
         queryset = Etf.objects.all()
