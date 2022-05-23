@@ -1,4 +1,4 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, generics
 from .serializers import EtfSerializer, FilterSerializer
 from .models import Etf
 
@@ -21,3 +21,6 @@ class EtfViewSet(viewsets.ReadOnlyModelViewSet):
             queryset = queryset.filter(fund_category=fund_category)
 
         return queryset
+
+class FilterCreateApiView(generics.CreateAPIView):
+    serializer_class = FilterSerializer
