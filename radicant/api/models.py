@@ -3,7 +3,6 @@ from django.db import models
 # Etf model were created by the following command:
 #   $ python manage.py inspectdb
 # After the ETFs.csv file was imported to db.sqlite3
-
 class Etf(models.Model):
     fund_symbol = models.TextField(blank=True, primary_key=True)
     quote_type = models.TextField(blank=True, null=True)
