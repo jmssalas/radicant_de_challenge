@@ -4,9 +4,9 @@ from .models import Etf, Filter
 class EtfSerializer(serializers.ModelSerializer):
     class Meta:
         model = Etf
-        fields = ['fund_symbol', 'fund_category', 'size_type']
+        fields = ['fund_symbol', ]
 
 class FilterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Filter
-        fields = ['fund_category', 'size_type']
+        fields = ['fund_category', 'size_type', ]
