@@ -4,6 +4,11 @@ from .serializers import EtfSerializer, FilterSerializer
 from .models import Etf, Filter
 
 class EtfListCreateAPIView(generics.ListCreateAPIView):
+    """
+    get: Retrieve all the EFS according to the filters
+    post: Create a new registry with the filters for later analysis
+    """
+
     filter_backends = [DjangoFilterBackend, ]
     filter_fields = ['size_type', 'fund_category', ]
 
