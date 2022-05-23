@@ -9,20 +9,11 @@ class EtfListCreateAPIView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         queryset = Etf.objects.all()
-        query_params = self.request.query_params
-        size_type, fund_category = None, None
 
-        if query_params:
-            serializer = FilterSerializer(data=query_params)
-            if serializer.is_valid():
-                size_type = serializer.data['size_type']
-                fund_category = serializer.data['fund_category']
-        else:
-            latest_filter = Filter.objects.last()
-            if latest_filter:
-                serializer = FilterSerializer(latest_filter)
-                size_type = serializer.data['size_type']
-                fund_category = serializer.data['fund_category']
+        serializer = FilterSerializer(data=self.request.query_params)
+        if serializer.is_valid():
+            size_type = serializer.data['size_type']
+            fund_category = serializer.data['fund_category']
 
         if size_type is not None and fund_category is not None:
             queryset = queryset.filter(size_type=size_type, fund_category=fund_category)
